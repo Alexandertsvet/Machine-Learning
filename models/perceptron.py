@@ -6,7 +6,7 @@ class Perceptron(object):
     Классификация на основе перцептрона.
     """
 
-    def __init__(self, eta=0.01, n_iter=50, random_state=42):
+    def __init__(self, eta=0.01, n_iter=50, random_state=1):
         self.eta = eta
         self.n_iter = n_iter
         self.random_state = random_state
@@ -24,7 +24,7 @@ class Perceptron(object):
                 update = self.eta*(target-self.predict(xi))
                 self.w_[1:] += update*xi
                 self.w_[0] += update
-                errors += int(update != 0)
+                errors += int(update != 0.0)
             self.errors_.append(errors)
         return self
 
@@ -39,3 +39,9 @@ class Perceptron(object):
         Возврашает метку класса после одной итерации
         """
         return np.where(self.net_input(X) >= 0.0, 1, -1)
+
+
+class Adaline(object):
+    """
+    Adaptive Linear neuron - адаптивный линейный нейрон.
+    """
